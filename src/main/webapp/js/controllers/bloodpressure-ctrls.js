@@ -78,11 +78,11 @@
                 var systoleData = [];
                 var diastoleData = [];
                 var rateData = [];
-                for (i = 0; i < $scope.data.length; i++) {
-                    $scope.highchartsNG.xAxis.categories.push($scope.data[i].date);
-                    systoleData.push($scope.data[i].systole);
-                    diastoleData.push($scope.data[i].diastole);
-                    rateData.push($scope.data[i].rate);
+                for (i = 0; i < $scope.data.items.length; i++) {
+                    $scope.highchartsNG.xAxis.categories.push($scope.data.items[i].date);
+                    systoleData.push($scope.data.items[i].systole);
+                    diastoleData.push($scope.data.items[i].diastole);
+                    rateData.push($scope.data.items[i].rate);
                 }
                 $scope.highchartsNG.series.push({name: 'Systolisch (mmHG)', color: 'blue', data: systoleData});
                 $scope.highchartsNG.series.push({name: 'Diastolisch (mmHG)', color: 'red', data: diastoleData});
@@ -90,6 +90,18 @@
                 $scope.highchartsNG.yAxis.plotLines.push({color: 'blue', value: average(systoleData), width: 1});
                 $scope.highchartsNG.yAxis.plotLines.push({color: 'red', value: average(diastoleData), width: 1});
                 $scope.highchartsNG.yAxis.plotLines.push({color: 'yellow', value: average(rateData), width: 1});
+            };
+
+            $scope.getWHOStyleClass = function (item) {
+                if (item.whoState === 'OPTIMAL' || item.whoState === 'NORMAL' || item.whoState === 'HIGH_NORMAL') {
+                    return 'alert alert-success glyphicon glyphicon-ok whoState';
+                } else if (item.whoState === 'STAGE_1') {
+                    return 'alert alert-warning glyphicon glyphicon-exclamation-sign whoState';
+                } else if (item.whoState === 'STAGE_2' || item.whoState === 'STAGE_3') {
+                    return 'alert alert-danger glyphicon glyphicon-alert whoState';
+                } else if (item.whoState === 'UNDEFINED') {
+                    return 'alert alert-info glyphicon glyphicon-exclamation-sign whoState';
+                }
             };
 
         }]);

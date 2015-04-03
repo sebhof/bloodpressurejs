@@ -17,7 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <div class="row" id="heading">
     <div class="col-md-12">
-        <h1>Blutdruck-Report vom {{from | date:'shortDate'}} bis {{to | date:'shortDate'}}</h1>
+        <h1>Blutdruck-Report</h1>
+        <h2>vom {{data.from | date:'shortDate'}} bis {{data.to | date:'shortDate'}}</h2>
     </div>
 </div>
 
@@ -42,13 +43,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in data">
+                    <tr ng-repeat="item in data.items">
                         <td>{{item.date | date}}</td>
                         <td>{{item.date | date:'shortTime'}}</td>
                         <td>{{item.systole}}</td>
                         <td>{{item.diastole}}</td>
                         <td>{{item.rate}}</td>
-                        <td>--</td>
+                        <td><span ng-class="getWHOStyleClass(item)"></span></td>
                     </tr>
                 </tbody>
             </table>

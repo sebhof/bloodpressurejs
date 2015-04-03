@@ -17,6 +17,8 @@
 package de.shofmann.bloodpressurejs.service;
 
 import de.shofmann.bloodpressurejs.BloodPressure;
+import de.shofmann.bloodpressurejs.BloodPressureReport;
+import de.shofmann.bloodpressurejs.BloodPressureReportItem;
 import de.shofmann.bloodpressurejs.DateParam;
 import de.shofmann.bloodpressurejs.ImportResult;
 import java.util.List;
@@ -49,22 +51,29 @@ import javax.ws.rs.core.Response;
 public class BloodPressureService {
 
     private static final Logger LOG = Logger.getLogger(BloodPressureService.class.getName());
-    
+
     @PersistenceContext(unitName = "bloodpressurejsPU")
     private EntityManager em;
-    
+
     @Resource
     SessionContext sessionContext;
-    
+
     @GET
     @Path("{from}/{to}")
-    public List<BloodPressure> get(@PathParam("from") DateParam from, @PathParam("to") DateParam to) {
-        return this.em.createQuery("SELECT bp FROM BloodPressure bp WHERE bp.date BETWEEN :from AND :to ORDER BY bp.date DESC")
+    public BloodPressureReport get(@PathParam("from") DateParam from, @PathParam("to") DateParam to) {
+        List<BloodPressure> bloodPressures
+                = this.em.createQuery("SELECT bp FROM BloodPressure bp WHERE bp.date BETWEEN :from AND :to ORDER BY bp.date DESC")
                 .setParameter("from", from.getDate(), TemporalType.TIMESTAMP)
                 .setParameter("to", to.getDate(), TemporalType.TIMESTAMP)
                 .getResultList();
+        BloodPressureReport report = new BloodPressureReport(from.getDate(), to.getDate());
+        for (BloodPressure bloodPressure : bloodPressures) {
+            report.addItem(new BloodPressureReportItem(bloodPressure));
+        }
+        report.sortItems();
+        return report;
     }
-    
+
     @POST
     public Response create(List<BloodPressure> bloodPressures) {
         BloodPressureService self = this.sessionContext.getBusinessObject(BloodPressureService.class);
@@ -75,7 +84,7 @@ public class BloodPressureService {
                 self.saveBloodPressure(bloodPressure);
                 successCount++;
             } catch (Exception e) {
-                LOG.log(Level.SEVERE, "Error storing bloodpressure ["+bloodPressure.toString()+"]", e);
+                LOG.log(Level.SEVERE, "Error storing bloodpressure [" + bloodPressure.toString() + "]", e);
                 errorCount++;
             }
         }
@@ -83,17 +92,17 @@ public class BloodPressureService {
         result.setErrorCount(errorCount);
         result.setSuccessCount(successCount);
         Response response = null;
-        if(errorCount != 0) {
+        if (errorCount != 0) {
             response = Response.status(Response.Status.NOT_ACCEPTABLE).entity(result).build();
         } else {
             response = Response.ok(result).build();
         }
         return response;
     }
-    
+
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void saveBloodPressure(BloodPressure bloodPressure) {
         this.em.persist(bloodPressure);
     }
-    
+
 }
