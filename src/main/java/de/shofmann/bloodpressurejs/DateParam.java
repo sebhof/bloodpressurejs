@@ -19,6 +19,7 @@ package de.shofmann.bloodpressurejs;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import static javax.faces.component.UIInput.isEmpty;
 import javax.ws.rs.WebApplicationException;
@@ -48,7 +49,16 @@ public class DateParam {
         }
     }
 
-    public Date getDate() {
+    public Date getBeginOfDayDate() {
         return date;
+    }
+    
+    public Date getEndOfDayDate() {
+        Calendar c = Calendar.getInstance();
+        c.setTime(this.date);
+        c.set(Calendar.HOUR_OF_DAY, 23);
+        c.set(Calendar.MINUTE, 59);
+        c.set(Calendar.SECOND, 59);
+        return c.getTime();
     }
 }

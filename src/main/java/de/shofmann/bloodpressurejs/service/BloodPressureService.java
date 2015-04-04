@@ -62,11 +62,11 @@ public class BloodPressureService {
     @Path("{from}/{to}")
     public BloodPressureReport get(@PathParam("from") DateParam from, @PathParam("to") DateParam to) {
         List<BloodPressure> bloodPressures
-                = this.em.createQuery("SELECT bp FROM BloodPressure bp WHERE bp.date BETWEEN :from AND :to ORDER BY bp.date DESC")
-                .setParameter("from", from.getDate(), TemporalType.TIMESTAMP)
-                .setParameter("to", to.getDate(), TemporalType.TIMESTAMP)
+                = this.em.createQuery("SELECT bp FROM BloodPressure bp WHERE bp.date BETWEEN :from AND :to")
+                .setParameter("from", from.getBeginOfDayDate(), TemporalType.TIMESTAMP)
+                .setParameter("to", to.getEndOfDayDate(), TemporalType.TIMESTAMP)
                 .getResultList();
-        BloodPressureReport report = new BloodPressureReport(from.getDate(), to.getDate());
+        BloodPressureReport report = new BloodPressureReport(from.getBeginOfDayDate(), to.getBeginOfDayDate());
         for (BloodPressure bloodPressure : bloodPressures) {
             report.addItem(new BloodPressureReportItem(bloodPressure));
         }

@@ -60,7 +60,7 @@
                     type: 'datetime',
                     labels: {
                         formatter: function () {
-                            return $filter('date')(this.value, 'medium');
+                            return $filter('date')(this.value, 'dd.MM.yyyy');
                             ;
                         },
                         rotation: -45,
@@ -78,7 +78,7 @@
                 var systoleData = [];
                 var diastoleData = [];
                 var rateData = [];
-                for (i = 0; i < $scope.data.items.length; i++) {
+                for (i = $scope.data.items.length-1; i >= 0 ; i--) {
                     $scope.highchartsNG.xAxis.categories.push($scope.data.items[i].date);
                     systoleData.push($scope.data.items[i].systole);
                     diastoleData.push($scope.data.items[i].diastole);
