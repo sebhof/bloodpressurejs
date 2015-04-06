@@ -53,7 +53,11 @@
                     }
                 },
                 yAxis: {
-                    plotLines: []
+                    plotLines: [],
+                    title: {
+                        text: undefined
+                    },
+                    floor: 40
                 },
                 xAxis: {
                     categories: [],
@@ -69,7 +73,7 @@
                 },
                 series: [],
                 title: {
-                    text: 'Blutdruck'
+                    text: undefined
                 },
                 loading: false
             };
@@ -87,21 +91,19 @@
                 $scope.highchartsNG.series.push({name: 'Systolisch (mmHG)', color: 'blue', data: systoleData});
                 $scope.highchartsNG.series.push({name: 'Diastolisch (mmHG)', color: 'red', data: diastoleData});
                 $scope.highchartsNG.series.push({name: 'Puls/Min.', color: 'yellow', data: rateData});
-                $scope.highchartsNG.yAxis.plotLines.push({color: 'blue', value: average(systoleData), width: 1});
-                $scope.highchartsNG.yAxis.plotLines.push({color: 'red', value: average(diastoleData), width: 1});
-                $scope.highchartsNG.yAxis.plotLines.push({color: 'yellow', value: average(rateData), width: 1});
+//                $scope.highchartsNG.yAxis.plotLines.push({color: 'blue', value: average(systoleData), width: 1});
+//                $scope.highchartsNG.yAxis.plotLines.push({color: 'red', value: average(diastoleData), width: 1});
+//                $scope.highchartsNG.yAxis.plotLines.push({color: 'yellow', value: average(rateData), width: 1});
             };
 
-            $scope.getWHOStyleClass = function (item) {
+            $scope.getWHOImageSrc = function (item) {
                 if (item.whoState === 'OPTIMAL' || item.whoState === 'NORMAL' || item.whoState === 'HIGH_NORMAL') {
-                    return 'alert alert-success glyphicon glyphicon-ok whoState';
+                    return 'images/who_green.png';
                 } else if (item.whoState === 'STAGE_1') {
-                    return 'alert alert-warning glyphicon glyphicon-exclamation-sign whoState';
+                    return 'images/who_yellow.png';
                 } else if (item.whoState === 'STAGE_2' || item.whoState === 'STAGE_3') {
-                    return 'alert alert-danger glyphicon glyphicon-alert whoState';
-                } else if (item.whoState === 'UNDEFINED') {
-                    return 'alert alert-info glyphicon glyphicon-exclamation-sign whoState';
-                }
+                    return 'images/who_red.png';
+                } 
             };
 
         }]);

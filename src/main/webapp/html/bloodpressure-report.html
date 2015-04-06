@@ -28,34 +28,40 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 <h3 class="panel-title">Durchschnittswerte</h3>
             </div>
             <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-2">Systolisch (mmHG)</div>
-                    <div class="col-md-2">Diastolisch (mmHG)</div>
-                    <div class="col-md-2">Puls/Min.</div>
-                    <div class="col-lg-4">WHO<sup>*</sup></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-2">Letzte 7 Tage:</div>
-                    <div class="col-md-2">120</div>
-                    <div class="col-md-2">80</div>
-                    <div class="col-md-2">65</div>
-                    <div class="col-md-4"><span ng-class="getWHOStyleClass({whoState:'OPTIMAL'})"></span></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-2">Letzte 30 Tage:</div>
-                    <div class="col-md-2">120</div>
-                    <div class="col-md-2">80</div>
-                    <div class="col-md-2">65</div>
-                    <div class="col-md-4"><span ng-class="getWHOStyleClass({whoState:'OPTIMAL'})"></span></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-2">Letzte 90 Tage:</div>
-                    <div class="col-md-2">120</div>
-                    <div class="col-md-2">80</div>
-                    <div class="col-md-2">65</div>
-                    <div class="col-md-4"><span ng-class="getWHOStyleClass({whoState:'OPTIMAL'})"></span></div>
-                </div>               
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Systolisch (mmHG)</th>
+                            <th>Diastolisch (mmHG)</th>
+                            <th>Puls/Min.</th>
+                            <th>WHO<sup>*</sup></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Letzte 7 Tage:</td>                            
+                            <td>120</td>
+                            <td>80</td>
+                            <td>65</td>
+                            <td><img ng-src="{{getWHOImageSrc({whoState:'OPTIMAL'})}}"></td>
+                        </tr>
+                        <tr>
+                            <td>Letzte 30 Tage:</td>                            
+                            <td>120</td>
+                            <td>80</td>
+                            <td>65</td>
+                            <td><img ng-src="{{getWHOImageSrc({whoState:'OPTIMAL'})}}"></td>
+                        </tr>
+                        <tr>
+                            <td>Letzte 90 Tage:</td>                            
+                            <td>120</td>
+                            <td>80</td>
+                            <td>65</td>
+                            <td><img ng-src="{{getWHOImageSrc({whoState:'OPTIMAL'})}}"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -83,7 +89,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             <div class="panel-body">
                 <div class="col-md-12">
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table table-condensed">
                             <thead>
                                 <tr>
                                     <th>Datum</th>
@@ -101,7 +107,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                                     <td>{{item.systole}}</td>
                                     <td>{{item.diastole}}</td>
                                     <td>{{item.rate}}</td>
-                                    <td><span ng-class="getWHOStyleClass(item)"></span></td>
+                                    <td><img ng-src="{{getWHOImageSrc(item)}}"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -119,42 +125,38 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 <h3 class="panel-title"><sup>*)</sup> WHO-Einordnung</h3>
             </div>
             <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-1"><span ng-class="getWHOStyleClass({whoState:'OPTIMAL'})"></span></div>
-                    <div class="col-md-3">Optimal</div>
-                    <div class="col-md-6">Systolisch < 120 mmHG, Diastolisch < 80 mmHG</div>
-                    <div class="col-md-2"></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-1"><span ng-class="getWHOStyleClass({whoState:'NORMAL'})"></span></div>
-                    <div class="col-md-3">Normal</div>
-                    <div class="col-md-6">Systolisch 120-129 mmHG, Diastolisch 80-84 mmHG</div>
-                    <div class="col-md-2"></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-1"><span ng-class="getWHOStyleClass({whoState:'HIGH_NORMAL'})"></span></div>
-                    <div class="col-md-3">Hoch-Normal</div>
-                    <div class="col-md-6">Systolisch 130-139 mmHG, Diastolisch 85-89 mmHG</div>
-                    <div class="col-md-2"></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-1"><span ng-class="getWHOStyleClass({whoState:'STAGE_1'})"></span></div>
-                    <div class="col-md-3">Milde Hypertonie (Stufe1)</div>
-                    <div class="col-md-6">Systolisch 140-159 mmHG, Diastolisch 90-99 mmHG</div>
-                    <div class="col-md-2"></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-1"><span ng-class="getWHOStyleClass({whoState:'STAGE_2'})"></span></div>
-                    <div class="col-md-3">Mittlere Hypertonie (Stufe2)</div>
-                    <div class="col-md-6">Systolisch 160-179 mmHG, Diastolisch 100-109 mmHG</div>
-                    <div class="col-md-2"></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-1"><span ng-class="getWHOStyleClass({whoState:'STAGE_3'})"></span></div>
-                    <div class="col-md-3">Schwere Hypertonie (Stufe3)</div>
-                    <div class="col-md-6">Systolisch >180 mmHG, Diastolisch >110 mmHG</div>
-                    <div class="col-md-2"></div>
-                </div>
+                <table class="table table-condensed">
+                    <tr>
+                        <td><img ng-src="{{getWHOImageSrc({whoState:'OPTIMAL'})}}"></td>
+                        <td>Optimal</td>
+                        <td>Systolisch < 120 mmHG, Diastolisch < 80 mmHG</td>
+                    </tr>
+                    <tr>
+                        <td><img ng-src="{{getWHOImageSrc({whoState:'NORMAL'})}}"></td>
+                        <td>Normal</td>
+                        <td>Systolisch 120-129 mmHG, Diastolisch 80-84 mmHG</td>
+                    </tr>
+                    <tr>
+                        <td><img ng-src="{{getWHOImageSrc({whoState:'HIGH_NORMAL'})}}"></td>
+                        <td>Hoch-Normal</td>
+                        <td>Systolisch 130-139 mmHG, Diastolisch 85-89 mmHG</td>
+                    </tr>
+                    <tr>
+                        <td><img ng-src="{{getWHOImageSrc({whoState:'STAGE_1'})}}"></td>
+                        <td>Milde Hypertonie (Stufe1)</td>
+                        <td>Systolisch 140-159 mmHG, Diastolisch 90-99 mmHG</td>
+                    </tr>
+                    <tr>
+                        <td><img ng-src="{{getWHOImageSrc({whoState:'STAGE_2'})}}"></td>
+                        <td>Mittlere Hypertonie (Stufe2)</td>
+                        <td>Systolisch 160-179 mmHG, Diastolisch 100-109 mmHG</td>
+                    </tr>
+                    <tr>
+                        <td><img ng-src="{{getWHOImageSrc({whoState:'STAGE_3'})}}"></td>
+                        <td>Schwere Hypertonie (Stufe3)</td>
+                        <td>Systolisch >180 mmHG, Diastolisch >110 mmHG</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

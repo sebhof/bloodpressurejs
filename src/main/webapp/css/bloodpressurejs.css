@@ -19,7 +19,23 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     Author     : shofmann
 */
 
-span.whoState {    
+table.table {
     margin-bottom: 0px !important;
-    padding: 3px !important;    
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+@media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+
+    .panel-heading {
+        background-color: #CCCCCC !important;
+        -webkit-print-color-adjust: exact; 
+    }
 }
