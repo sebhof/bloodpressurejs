@@ -36,12 +36,72 @@ public class BloodPressureReport implements Serializable {
 
     private Date to;
 
+    private BloodPressureReportItem average7Days;
+
+    private BloodPressureReportItem average30Days;
+
+    private BloodPressureReportItem average90Days;
+
     public BloodPressureReport() {
     }
 
     public BloodPressureReport(Date from, Date to) {
         this.from = from;
         this.to = to;
+    }
+
+    /**
+     * Get the value of average90Days
+     *
+     * @return the value of average90Days
+     */
+    public BloodPressureReportItem getAverage90Days() {
+        return average90Days;
+    }
+
+    /**
+     * Set the value of average90Days
+     *
+     * @param average90Days new value of average90Days
+     */
+    public void setAverage90Days(BloodPressureReportItem average90Days) {
+        this.average90Days = average90Days;
+    }
+
+    /**
+     * Get the value of average30Days
+     *
+     * @return the value of average30Days
+     */
+    public BloodPressureReportItem getAverage30Days() {
+        return average30Days;
+    }
+
+    /**
+     * Set the value of average30Days
+     *
+     * @param average30Days new value of average30Days
+     */
+    public void setAverage30Days(BloodPressureReportItem average30Days) {
+        this.average30Days = average30Days;
+    }
+
+    /**
+     * Get the value of average7Days
+     *
+     * @return the value of average7Days
+     */
+    public BloodPressureReportItem getAverage7Days() {
+        return average7Days;
+    }
+
+    /**
+     * Set the value of average7Days
+     *
+     * @param average7Days new value of average7Days
+     */
+    public void setAverage7Days(BloodPressureReportItem average7Days) {
+        this.average7Days = average7Days;
     }
 
     /**

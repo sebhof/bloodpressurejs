@@ -51,7 +51,7 @@ public class BloodPressureReportItem implements Serializable {
     /**
      * Calculates the WHO state
      */
-    private void calculateWHOState() {
+    public void calculateWHOState() {
         /**
          * We have to calcalate from "worst" to "best" because one codition is
          * enough to get a worser rate...

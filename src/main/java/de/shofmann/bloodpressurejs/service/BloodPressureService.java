@@ -17,21 +17,13 @@
 package de.shofmann.bloodpressurejs.service;
 
 import de.shofmann.bloodpressurejs.BloodPressure;
+import de.shofmann.bloodpressurejs.BloodPressureBean;
 import de.shofmann.bloodpressurejs.BloodPressureReport;
-import de.shofmann.bloodpressurejs.BloodPressureReportItem;
-import de.shofmann.bloodpressurejs.DateParam;
-import de.shofmann.bloodpressurejs.ImportResult;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.Resource;
-import javax.ejb.SessionContext;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TemporalType;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -39,6 +31,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+import static de.shofmann.bloodpressurejs.Tools.*;
 
 /**
  *
@@ -52,36 +45,22 @@ public class BloodPressureService {
 
     private static final Logger LOG = Logger.getLogger(BloodPressureService.class.getName());
 
-    @PersistenceContext(unitName = "bloodpressurejsPU")
-    private EntityManager em;
-
-    @Resource
-    SessionContext sessionContext;
+    @EJB
+    private BloodPressureBean bloodPressureBean;
 
     @GET
     @Path("{from}/{to}")
     public BloodPressureReport get(@PathParam("from") DateParam from, @PathParam("to") DateParam to) {
-        List<BloodPressure> bloodPressures
-                = this.em.createQuery("SELECT bp FROM BloodPressure bp WHERE bp.date BETWEEN :from AND :to")
-                .setParameter("from", from.getBeginOfDayDate(), TemporalType.TIMESTAMP)
-                .setParameter("to", to.getEndOfDayDate(), TemporalType.TIMESTAMP)
-                .getResultList();
-        BloodPressureReport report = new BloodPressureReport(from.getBeginOfDayDate(), to.getBeginOfDayDate());
-        for (BloodPressure bloodPressure : bloodPressures) {
-            report.addItem(new BloodPressureReportItem(bloodPressure));
-        }
-        report.sortItems();
-        return report;
+        return this.bloodPressureBean.createReport(getBeginOfDayDate(from.getDate()), getEndOfDayDate(to.getDate()));
     }
 
     @POST
     public Response create(List<BloodPressure> bloodPressures) {
-        BloodPressureService self = this.sessionContext.getBusinessObject(BloodPressureService.class);
         int successCount = 0;
         int errorCount = 0;
         for (BloodPressure bloodPressure : bloodPressures) {
             try {
-                self.saveBloodPressure(bloodPressure);
+                this.bloodPressureBean.saveBloodPressure(bloodPressure);
                 successCount++;
             } catch (Exception e) {
                 LOG.log(Level.SEVERE, "Error storing bloodpressure [" + bloodPressure.toString() + "]", e);
@@ -98,11 +77,6 @@ public class BloodPressureService {
             response = Response.ok(result).build();
         }
         return response;
-    }
-
-    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-    public void saveBloodPressure(BloodPressure bloodPressure) {
-        this.em.persist(bloodPressure);
     }
 
 }

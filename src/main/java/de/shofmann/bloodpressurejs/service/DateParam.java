@@ -14,12 +14,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.shofmann.bloodpressurejs;
+package de.shofmann.bloodpressurejs.service;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import static javax.faces.component.UIInput.isEmpty;
 import javax.ws.rs.WebApplicationException;
@@ -48,17 +47,9 @@ public class DateParam {
                     .build());
         }
     }
-
-    public Date getBeginOfDayDate() {
-        return date;
+    
+    public Date getDate(){
+        return this.date;
     }
     
-    public Date getEndOfDayDate() {
-        Calendar c = Calendar.getInstance();
-        c.setTime(this.date);
-        c.set(Calendar.HOUR_OF_DAY, 23);
-        c.set(Calendar.MINUTE, 59);
-        c.set(Calendar.SECOND, 59);
-        return c.getTime();
-    }
 }
