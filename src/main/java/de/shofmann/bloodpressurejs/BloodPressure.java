@@ -23,6 +23,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -42,8 +43,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class BloodPressure implements Serializable {
 
+    @SequenceGenerator(
+            name = "bloodpressure-seq-gen",
+            sequenceName = "seq_blood_pressure",
+            allocationSize = 500
+    ) // initialValue=1 (default) but 'START WITH'=500
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bloodpressure-seq-gen")
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     private Long id;
 
@@ -57,12 +63,12 @@ public class BloodPressure implements Serializable {
     @Min(1)
     private int systole;
 
-    @Column(name="diastole", nullable = false)
+    @Column(name = "diastole", nullable = false)
     @NotNull
     @Min(1)
     private int diastole;
 
-    @Column(name="rate", nullable = false)
+    @Column(name = "rate", nullable = false)
     @NotNull
     @Min(1)
     private int rate;
@@ -161,5 +167,5 @@ public class BloodPressure implements Serializable {
     public String toString() {
         return "BloodPressure{" + "id=" + id + ", date=" + date + ", systole=" + systole + ", diastole=" + diastole + ", rate=" + rate + '}';
     }
-    
+
 }

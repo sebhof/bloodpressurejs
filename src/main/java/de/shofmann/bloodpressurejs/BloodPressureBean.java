@@ -48,35 +48,35 @@ public class BloodPressureBean {
     }
 
     public BloodPressureReport createReport(Date from, Date to) {
-        
+
         BloodPressureBean self = this.sessionContext.getBusinessObject(BloodPressureBean.class);
-        
+
         List<BloodPressure> bloodPressures = self.getBloodPressure(from, to);
         BloodPressureReport report = new BloodPressureReport(from, to);
         for (BloodPressure bloodPressure : bloodPressures) {
             report.addItem(new BloodPressureReportItem(bloodPressure));
         }
         report.sortItems();
-        
+
         // calculate averages
         Calendar averageFrom = Calendar.getInstance();
         averageFrom.setTime(to);
         averageFrom.add(Calendar.DAY_OF_MONTH, -7);
         bloodPressures = self.getBloodPressure(getBeginOfDayDate(averageFrom.getTime()), to);
         report.setAverage7Days(self.calculateAverage(bloodPressures));
-        
+
         averageFrom = Calendar.getInstance();
         averageFrom.setTime(to);
         averageFrom.add(Calendar.DAY_OF_MONTH, -30);
         bloodPressures = self.getBloodPressure(getBeginOfDayDate(averageFrom.getTime()), to);
         report.setAverage30Days(self.calculateAverage(bloodPressures));
-        
+
         averageFrom = Calendar.getInstance();
         averageFrom.setTime(to);
         averageFrom.add(Calendar.DAY_OF_MONTH, -90);
         bloodPressures = self.getBloodPressure(getBeginOfDayDate(averageFrom.getTime()), to);
         report.setAverage90Days(self.calculateAverage(bloodPressures));
-        
+
         return report;
     }
 
@@ -86,24 +86,29 @@ public class BloodPressureBean {
                 .setParameter("to", to, TemporalType.TIMESTAMP)
                 .getResultList();
     }
-    
+
     public BloodPressureReportItem calculateAverage(List<BloodPressure> bloodPressures) {
-        int systoleSum = 0;
-        int diastoleSum = 0;
-        int rateSum = 0;
-        for (BloodPressure bloodPressure : bloodPressures) {
-            systoleSum += bloodPressure.getSystole();
-            diastoleSum += bloodPressure.getDiastole();
-            rateSum += bloodPressure.getRate();
-        }
-        float systoleAverage = systoleSum / bloodPressures.size();
-        float diastoleAverage = diastoleSum / bloodPressures.size();
-        float rateAverage = rateSum / bloodPressures.size();
+
         BloodPressureReportItem item = new BloodPressureReportItem();
-        item.setSystole(Math.round(systoleAverage));
-        item.setDiastole(Math.round(diastoleAverage));
-        item.setRate(Math.round(rateAverage));
-        item.calculateWHOState();
+
+        if (!bloodPressures.isEmpty()) {
+            int systoleSum = 0;
+            int diastoleSum = 0;
+            int rateSum = 0;
+            for (BloodPressure bloodPressure : bloodPressures) {
+                systoleSum += bloodPressure.getSystole();
+                diastoleSum += bloodPressure.getDiastole();
+                rateSum += bloodPressure.getRate();
+            }
+            float systoleAverage = systoleSum / bloodPressures.size();
+            float diastoleAverage = diastoleSum / bloodPressures.size();
+            float rateAverage = rateSum / bloodPressures.size();
+            item.setSystole(Math.round(systoleAverage));
+            item.setDiastole(Math.round(diastoleAverage));
+            item.setRate(Math.round(rateAverage));
+            item.calculateWHOState();
+        }
+
         return item;
     }
 }

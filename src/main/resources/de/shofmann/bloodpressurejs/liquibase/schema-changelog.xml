@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="1" author="shofmann">
+        
+        <createTable tableName="blood_pressure">
+            <column name="id" type="bigint" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="creation_date" type="timestamp">
+                <constraints nullable="false"/>                
+            </column>
+            <column name="diastole" type="int">                
+                <constraints nullable="false"/>
+            </column>
+            <column name="rate" type="int">                
+                <constraints nullable="false"/>
+            </column>
+            <column name="systole" type="int">                
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <addUniqueConstraint columnNames="creation_date, diastole, rate, systole" tableName="blood_pressure" />
+        
+        <createIndex tableName="blood_pressure" indexName="idx_blood_pressure_cdate">
+            <column name="creation_date" type="timestamp"/>
+        </createIndex>
+        
+        <createSequence sequenceName="seq_blood_pressure" startValue="500" incrementBy="1"/>
+        
+        <rollback>        
+            <dropSequence sequenceName="seq_blood_pressure"/>
+            <dropIndex tableName="blood_pressure" indexName="idx_blood_pressure_cdate"/>
+            <dropTable tableName="blood_pressure"/>            
+        </rollback>
+        
+    </changeSet>
+    
+</databaseChangeLog>
