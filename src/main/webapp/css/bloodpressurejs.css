@@ -23,7 +23,8 @@ table.table {
     margin-bottom: 0px !important;
 }
 
-h2 {
+ul.nav {
+    margin-top: 10px;
     margin-bottom: 20px;
 }
 

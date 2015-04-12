@@ -15,107 +15,110 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<div class="container-fluid">
+<div class="no-print">
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="#/">Blutdruck</a></li>
+        <li role="presentation" class="active"><a href="#/import">Import</a></li>                        
+    </ul>
+</div>
 
 
-
-    <div class="panel panel-default">
-        <div class="panel-heading">Datenimport</div>
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <input data-file id="id_image" name="image" ng-model="my_image_model" type="file">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3">Datum:</div>
-                <div class="col-md-3">Spalte: {{selectionModel.bloodPressure.dateColumn}}</div>
-                <div class="col-md-3">Zeilen: {{selectionModel.bloodPressure.startRow}} - {{selectionModel.bloodPressure.endRow}}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-3">Uhrzeit:</div>
-                <div class="col-md-3">Spalte: {{selectionModel.bloodPressure.timeColumn}}</div>
-                <div class="col-md-3">Zeilen: {{selectionModel.bloodPressure.startRow}} - {{selectionModel.bloodPressure.endRow}}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-3">Systole:</div>
-                <div class="col-md-3">Spalte: {{selectionModel.bloodPressure.systoleColumn}}</div>
-                <div class="col-md-3">Zeilen: {{selectionModel.bloodPressure.startRow}} - {{selectionModel.bloodPressure.endRow}}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-3">Diastole:</div>
-                <div class="col-md-3">Spalte: {{selectionModel.bloodPressure.diastoleColumn}}</div>
-                <div class="col-md-3">Zeilen: {{selectionModel.bloodPressure.startRow}} - {{selectionModel.bloodPressure.endRow}}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-3">Puls:</div>
-                <div class="col-md-3">Spalte: {{selectionModel.bloodPressure.rateColumn}}</div>
-                <div class="col-md-3">Zeilen: {{selectionModel.bloodPressure.startRow}} - {{selectionModel.bloodPressure.endRow}}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="btn-group">
-                        <label class="btn btn-success" ng-model="radioModel" btn-radio="'Datum'" uncheckable>Datum</label>
-                        <label class="btn btn-success" ng-model="radioModel" btn-radio="'Zeit'" uncheckable>Zeit</label>
-                        <label class="btn btn-success" ng-model="radioModel" btn-radio="'Systole'" uncheckable>Systole</label>
-                        <label class="btn btn-success" ng-model="radioModel" btn-radio="'Diastole'" uncheckable>Diastole</label>
-                        <label class="btn btn-success" ng-model="radioModel" btn-radio="'Puls'" uncheckable>Puls</label>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Datenimport</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <input data-file id="id_image" name="image" ng-model="my_image_model" type="file">
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div>
+                <div class="row">
+                    <div class="col-md-3">Datum:</div>
+                    <div class="col-md-3">Spalte: {{selectionModel.bloodPressure.dateColumn}}</div>
+                    <div class="col-md-3">Zeilen: {{selectionModel.bloodPressure.startRow}} - {{selectionModel.bloodPressure.endRow}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">Uhrzeit:</div>
+                    <div class="col-md-3">Spalte: {{selectionModel.bloodPressure.timeColumn}}</div>
+                    <div class="col-md-3">Zeilen: {{selectionModel.bloodPressure.startRow}} - {{selectionModel.bloodPressure.endRow}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">Systole:</div>
+                    <div class="col-md-3">Spalte: {{selectionModel.bloodPressure.systoleColumn}}</div>
+                    <div class="col-md-3">Zeilen: {{selectionModel.bloodPressure.startRow}} - {{selectionModel.bloodPressure.endRow}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">Diastole:</div>
+                    <div class="col-md-3">Spalte: {{selectionModel.bloodPressure.diastoleColumn}}</div>
+                    <div class="col-md-3">Zeilen: {{selectionModel.bloodPressure.startRow}} - {{selectionModel.bloodPressure.endRow}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">Puls:</div>
+                    <div class="col-md-3">Spalte: {{selectionModel.bloodPressure.rateColumn}}</div>
+                    <div class="col-md-3">Zeilen: {{selectionModel.bloodPressure.startRow}} - {{selectionModel.bloodPressure.endRow}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="btn-group">
+                            <label class="btn btn-success" ng-model="radioModel" btn-radio="'Datum'" uncheckable>Datum</label>
+                            <label class="btn btn-success" ng-model="radioModel" btn-radio="'Zeit'" uncheckable>Zeit</label>
+                            <label class="btn btn-success" ng-model="radioModel" btn-radio="'Systole'" uncheckable>Systole</label>
+                            <label class="btn btn-success" ng-model="radioModel" btn-radio="'Diastole'" uncheckable>Diastole</label>
+                            <label class="btn btn-success" ng-model="radioModel" btn-radio="'Puls'" uncheckable>Puls</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div>
 
-                        <script type="text/ng-template" id="import_preview_modal.html">
-                            <div class="modal-header">
+                            <script type="text/ng-template" id="import_preview_modal.html">
+                                <div class="modal-header">
                                 <h3 class="modal-title">Blutdruck Werte importieren</h3>
-                            </div>
+                                </div>
                             <div class="modal-body">
                                 <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Datum</th>                                            
-                                            <th>Systole</th>
-                                            <th>Diastole</th>
-                                            <th>Puls</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="item in items" >
-                                            <td >{{item.date | date : 'medium'}}</td>
-                                            <td>{{item.systole}}</td>
-                                            <td>{{item.diastole}}</td>
-                                            <td>{{item.rate}}</td>
-                                        </tr>
-                                    </tbody>
+                                <thead>
+                                <tr>
+                                <th>Datum</th>                                            
+                                <th>Systole</th>
+                                <th>Diastole</th>
+                                <th>Puls</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in items" >
+                                <td >{{item.date | date : 'medium'}}</td>
+                                <td>{{item.systole}}</td>
+                                <td>{{item.diastole}}</td>
+                                <td>{{item.rate}}</td>
+                                </tr>
+                                </tbody>
                                 </table>
-                            </div>
-                            <div class="modal-footer">                            
+                                </div>
+                                <div class="modal-footer">                            
                                 <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
                                 <button class="btn btn-primary" ng-click="ok()">OK</button>
-                            </div>
-                        </script>
+                                </div>
+                            </script>
 
+                        </div>
+                        <button class="btn" ng-click="previewBloodpressure()" ng-disabled="!previewButtonEnabled()">Preview</button>
                     </div>
-                    <button class="btn" ng-click="previewBloodpressure()" ng-disabled="!previewButtonEnabled()">Preview</button>
                 </div>
-            </div>
-        </div>        
+            </div>        
+        </div>
     </div>
+</div>
 
-    <hot-table settings="{afterSelectionEnd: afterSelectionEnd}" 
-               colHeaders="true" 
-               rowHeaders="true"
-               datarows="db.rows"
-               columns="db.columns"
-               height="800" 
-               width="1200"
-               >            
-    </hot-table>
-
-
-
-    <!--
-              
-        
-    -->
+<div class="row">
+    <div class="col-md-12">
+        <hot-table settings="{afterSelectionEnd: afterSelectionEnd}" 
+                   colHeaders="true" 
+                   rowHeaders="true"
+                   datarows="db.rows"
+                   columns="db.columns"
+                   height="800" 
+                   >            
+        </hot-table>
+    </div>
 </div>

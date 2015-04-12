@@ -15,6 +15,13 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
+<div class="no-print">
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="#/">Blutdruck</a></li>
+        <li role="presentation"><a href="#/import">Import</a></li>                        
+    </ul>
+</div>
+
 <div class="row" id="heading">
     <div class="col-md-12">
         <h2>Blutdruck-Report <small>vom {{data.from| date:'dd.MM.yyyy'}} bis {{data.to| date:'dd.MM.yyyy'}}</small></h2>
@@ -127,32 +134,32 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             <div class="panel-body">
                 <table class="table table-condensed">
                     <tr>
-                        <td><img ng-src="{{getWHOImageSrc({whoState:'OPTIMAL'})}}"></td>
+                        <td><img ng-src="{{getWHOImageSrc({whoState: 'OPTIMAL'})}}"></td>
                         <td>Optimal</td>
                         <td>Systolisch < 120 mmHG, Diastolisch < 80 mmHG</td>
                     </tr>
                     <tr>
-                        <td><img ng-src="{{getWHOImageSrc({whoState:'NORMAL'})}}"></td>
+                        <td><img ng-src="{{getWHOImageSrc({whoState: 'NORMAL'})}}"></td>
                         <td>Normal</td>
                         <td>Systolisch 120-129 mmHG, Diastolisch 80-84 mmHG</td>
                     </tr>
                     <tr>
-                        <td><img ng-src="{{getWHOImageSrc({whoState:'HIGH_NORMAL'})}}"></td>
+                        <td><img ng-src="{{getWHOImageSrc({whoState: 'HIGH_NORMAL'})}}"></td>
                         <td>Hoch-Normal</td>
                         <td>Systolisch 130-139 mmHG, Diastolisch 85-89 mmHG</td>
                     </tr>
                     <tr>
-                        <td><img ng-src="{{getWHOImageSrc({whoState:'STAGE_1'})}}"></td>
+                        <td><img ng-src="{{getWHOImageSrc({whoState: 'STAGE_1'})}}"></td>
                         <td>Milde Hypertonie (Stufe1)</td>
                         <td>Systolisch 140-159 mmHG, Diastolisch 90-99 mmHG</td>
                     </tr>
                     <tr>
-                        <td><img ng-src="{{getWHOImageSrc({whoState:'STAGE_2'})}}"></td>
+                        <td><img ng-src="{{getWHOImageSrc({whoState: 'STAGE_2'})}}"></td>
                         <td>Mittlere Hypertonie (Stufe2)</td>
                         <td>Systolisch 160-179 mmHG, Diastolisch 100-109 mmHG</td>
                     </tr>
                     <tr>
-                        <td><img ng-src="{{getWHOImageSrc({whoState:'STAGE_3'})}}"></td>
+                        <td><img ng-src="{{getWHOImageSrc({whoState: 'STAGE_3'})}}"></td>
                         <td>Schwere Hypertonie (Stufe3)</td>
                         <td>Systolisch >180 mmHG, Diastolisch >110 mmHG</td>
                     </tr>
