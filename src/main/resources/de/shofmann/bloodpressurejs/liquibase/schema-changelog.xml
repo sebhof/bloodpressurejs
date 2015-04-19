@@ -42,4 +42,29 @@
         
     </changeSet>
     
+    <changeSet id="2" author="shofmann">
+
+        <createTable tableName="sequence">
+            <column name="seq_name" type="varchar(50)" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="seq_count" type="numeric">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <insert tableName="sequence">
+            <column name="seq_name" value="SEQ_GEN"/>
+            <column name="seq_count" valueNumeric="1000"/>
+        </insert>
+
+        <dropSequence sequenceName="seq_blood_pressure"/>
+        
+        <rollback>
+            <dropTable tableName="sequence"/>
+            <createSequence sequenceName="seq_blood_pressure" startValue="1000" incrementBy="1"/>
+        </rollback>        
+        
+    </changeSet>
+    
 </databaseChangeLog>
