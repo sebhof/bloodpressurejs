@@ -37,15 +37,6 @@
                 console.log("ERROR: " + data);
             });
 
-            var average = function (data) {
-                var sum = data.reduce(function (sum, value) {
-                    return sum + value;
-                }, 0);
-
-                var avg = sum / data.length;
-                return avg;
-            };
-
             $scope.highchartsNG = {
                 options: {
                     chart: {
@@ -91,13 +82,12 @@
                 $scope.highchartsNG.series.push({name: 'Systolisch (mmHG)', color: 'blue', data: systoleData});
                 $scope.highchartsNG.series.push({name: 'Diastolisch (mmHG)', color: 'red', data: diastoleData});
                 $scope.highchartsNG.series.push({name: 'Puls/Min.', color: 'yellow', data: rateData});
-//                $scope.highchartsNG.yAxis.plotLines.push({color: 'blue', value: average(systoleData), width: 1});
-//                $scope.highchartsNG.yAxis.plotLines.push({color: 'red', value: average(diastoleData), width: 1});
-//                $scope.highchartsNG.yAxis.plotLines.push({color: 'yellow', value: average(rateData), width: 1});
             };
 
             $scope.getWHOImageSrc = function (item) {
-                if (item.whoState === 'OPTIMAL' || item.whoState === 'NORMAL' || item.whoState === 'HIGH_NORMAL') {
+                if (item === undefined) {
+                    return "";
+                } else if (item.whoState === 'OPTIMAL' || item.whoState === 'NORMAL' || item.whoState === 'HIGH_NORMAL') {
                     return 'images/who_green.png';
                 } else if (item.whoState === 'STAGE_1') {
                     return 'images/who_yellow.png';

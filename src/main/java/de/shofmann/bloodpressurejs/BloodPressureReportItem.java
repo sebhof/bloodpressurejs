@@ -72,7 +72,7 @@ public class BloodPressureReportItem implements Serializable {
             this.whoState = WHOState.UNDEFINED;
         }
     }
-
+    
     /**
      * Indicates whether the value is between lowest and highest (including)
      *

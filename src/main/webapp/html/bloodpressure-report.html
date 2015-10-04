@@ -48,23 +48,23 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     <tbody>
                         <tr>
                             <td>Letzte 7 Tage:</td>                            
-                            <td>{{data.average7Days.systole}}</td>
-                            <td>{{data.average7Days.diastole}}</td>
-                            <td>{{data.average7Days.rate}}</td>
+                            <td>{{data.average7Days === undefined ? "N/A":data.average7Days.systole}}</td>
+                            <td>{{data.average7Days === undefined ? "N/A":data.average7Days.diastole}}</td>
+                            <td>{{data.average7Days === undefined ? "N/A":data.average7Days.rate}}</td>
                             <td><img ng-src="{{getWHOImageSrc(data.average7Days)}}"></td>
                         </tr>
                         <tr>
                             <td>Letzte 30 Tage:</td>                            
-                            <td>{{data.average30Days.systole}}</td>
-                            <td>{{data.average30Days.diastole}}</td>
-                            <td>{{data.average30Days.rate}}</td>
+                            <td>{{data.average30Days === undefined ? "N/A":data.average7Days.systole}}</td>
+                            <td>{{data.average30Days === undefined ? "N/A":data.average7Days.diastole}}</td>
+                            <td>{{data.average30Days === undefined ? "N/A":data.average7Days.rate}}</td>
                             <td><img ng-src="{{getWHOImageSrc(data.average30Days)}}"></td>
                         </tr>
                         <tr>
                             <td>Letzte 90 Tage:</td>                            
-                            <td>{{data.average90Days.systole}}</td>
-                            <td>{{data.average90Days.diastole}}</td>
-                            <td>{{data.average90Days.rate}}</td>
+                            <td>{{data.average90Days === undefined ? "N/A":data.average7Days.systole}}</td>
+                            <td>{{data.average90Days === undefined ? "N/A":data.average7Days.diastole}}</td>
+                            <td>{{data.average90Days === undefined ? "N/A":data.average7Days.rate}}</td>
                             <td><img ng-src="{{getWHOImageSrc(data.average90Days)}}"></td>
                         </tr>
                     </tbody>

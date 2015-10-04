@@ -63,19 +63,27 @@ public class BloodPressureBean {
         averageFrom.setTime(to);
         averageFrom.add(Calendar.DAY_OF_MONTH, -7);
         bloodPressures = self.getBloodPressure(getBeginOfDayDate(averageFrom.getTime()), to);
-        report.setAverage7Days(self.calculateAverage(bloodPressures));
+        // say we have enough values if we have at least one messurement per day minus ~10%...
+        if (bloodPressures.size() > 6) {
+            report.setAverage7Days(self.calculateAverage(bloodPressures));
+        }
 
         averageFrom = Calendar.getInstance();
         averageFrom.setTime(to);
         averageFrom.add(Calendar.DAY_OF_MONTH, -30);
         bloodPressures = self.getBloodPressure(getBeginOfDayDate(averageFrom.getTime()), to);
-        report.setAverage30Days(self.calculateAverage(bloodPressures));
-
+        // say we have enough values if we have at least one messurement per day minus ~10%...
+        if (bloodPressures.size() > 27) {
+            report.setAverage30Days(self.calculateAverage(bloodPressures));
+        }
         averageFrom = Calendar.getInstance();
         averageFrom.setTime(to);
         averageFrom.add(Calendar.DAY_OF_MONTH, -90);
         bloodPressures = self.getBloodPressure(getBeginOfDayDate(averageFrom.getTime()), to);
-        report.setAverage90Days(self.calculateAverage(bloodPressures));
+        // say we have enough values if we have at least one messurement per day minus ~10%...
+        if (bloodPressures.size() > 80) {
+            report.setAverage90Days(self.calculateAverage(bloodPressures));
+        }
 
         return report;
     }
