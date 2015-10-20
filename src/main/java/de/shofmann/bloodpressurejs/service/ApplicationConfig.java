@@ -41,6 +41,7 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(de.shofmann.bloodpressurejs.service.BloodPressureService.class);
+        resources.add(de.shofmann.bloodpressurejs.service.WeightService.class);
     }
     
 }

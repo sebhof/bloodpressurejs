@@ -67,4 +67,43 @@
         
     </changeSet>
     
+    <changeSet id="3" author="shofmann">
+        
+        <createTable tableName="weight">
+            <column name="id" type="bigint" autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="creation_date" type="timestamp">
+                <constraints nullable="false"/>                
+            </column>
+            <column name="weight" type="float">                
+                <constraints nullable="false"/>
+            </column>
+            <column name="body_fat" type="float">                
+                <constraints nullable="false"/>
+            </column>
+            <column name="water" type="float">                
+                <constraints nullable="false"/>
+            </column>
+            <column name="muscle" type="float">                
+                <constraints nullable="false"/>
+            </column>
+            <column name="bone" type="float">                
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <addUniqueConstraint columnNames="creation_date, weight, body_fat, water, muscle, bone" tableName="weight" />
+        
+        <createIndex tableName="weight" indexName="idx_weight_cdate">
+            <column name="creation_date" type="timestamp"/>
+        </createIndex>
+        
+        <rollback>                    
+            <dropIndex tableName="weight" indexName="idx_weight_cdate"/>
+            <dropTable tableName="weight"/>            
+        </rollback>
+        
+    </changeSet>
+    
 </databaseChangeLog>
