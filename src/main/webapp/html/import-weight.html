@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<!--
+Copyright (C) 2015 shofmann
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<div class="no-print">
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="#/">Blutdruck-Report</a></li>
+        <li role="presentation" class="active"><a href="#/import">Datenimport</a></li>                        
+    </ul>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="no-print">
+            <ul class="nav nav-tabs">
+                <li role="presentation"><a href="#/import-bloodpressure">Blutdruck</a></li>
+                <li role="presentation" class="active"><a href="#/import-weight">Gewicht</a></li>                        
+            </ul>
+        </div>
+        <div class="panel panel-default">            
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <input data-file id="id_image" name="image" ng-model="my_image_model" type="file">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">Datum:</div>
+                    <div class="col-md-3">Spalte: {{selectionModel.weight.dateColumn}}</div>
+                    <div class="col-md-3">Zeilen: {{selectionModel.weight.startRow}} - {{selectionModel.weight.endRow}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">Uhrzeit:</div>
+                    <div class="col-md-3">Spalte: {{selectionModel.weight.timeColumn}}</div>
+                    <div class="col-md-3">Zeilen: {{selectionModel.weight.startRow}} - {{selectionModel.weight.endRow}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">Gewicht:</div>
+                    <div class="col-md-3">Spalte: {{selectionModel.weight.weightColumn}}</div>
+                    <div class="col-md-3">Zeilen: {{selectionModel.weight.startRow}} - {{selectionModel.weight.endRow}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">BMI:</div>
+                    <div class="col-md-3">Spalte: {{selectionModel.weight.bmiColumn}}</div>
+                    <div class="col-md-3">Zeilen: {{selectionModel.weight.startRow}} - {{selectionModel.weight.endRow}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">Muskelanteil:</div>
+                    <div class="col-md-3">Spalte: {{selectionModel.weight.muscleColumn}}</div>
+                    <div class="col-md-3">Zeilen: {{selectionModel.weight.startRow}} - {{selectionModel.weight.endRow}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">Körperfettanteil:</div>
+                    <div class="col-md-3">Spalte: {{selectionModel.weight.bodyFatColumn}}</div>
+                    <div class="col-md-3">Zeilen: {{selectionModel.weight.startRow}} - {{selectionModel.weight.endRow}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">Wasseranteil:</div>
+                    <div class="col-md-3">Spalte: {{selectionModel.weight.waterColumn}}</div>
+                    <div class="col-md-3">Zeilen: {{selectionModel.weight.startRow}} - {{selectionModel.weight.endRow}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">Knochenanteil:</div>
+                    <div class="col-md-3">Spalte: {{selectionModel.weight.boneColumn}}</div>
+                    <div class="col-md-3">Zeilen: {{selectionModel.weight.startRow}} - {{selectionModel.weight.endRow}}</div>
+                </div>                
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="btn-group">
+                            <label class="btn btn-success" ng-model="radioModel" btn-radio="'Datum'" uncheckable>Datum</label>
+                            <label class="btn btn-success" ng-model="radioModel" btn-radio="'Zeit'" uncheckable>Zeit</label>
+                            <label class="btn btn-success" ng-model="radioModel" btn-radio="'Gewicht'" uncheckable>Gewicht</label>
+                            <label class="btn btn-success" ng-model="radioModel" btn-radio="'BMI'" uncheckable>BMI</label>
+                            <label class="btn btn-success" ng-model="radioModel" btn-radio="'Muskelanteil'" uncheckable>Muskelanteil</label>
+                            <label class="btn btn-success" ng-model="radioModel" btn-radio="'Körperfettanteil'" uncheckable>Körperfettanteil</label>
+                            <label class="btn btn-success" ng-model="radioModel" btn-radio="'Wasseranteil'" uncheckable>Wasseranteil</label>
+                            <label class="btn btn-success" ng-model="radioModel" btn-radio="'Knochenanteil'" uncheckable>Knochenanteil</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div>
+
+                            <script type="text/ng-template" id="import_weight_preview_modal.html">
+                                <div class="modal-header">
+                                <h3 class="modal-title">Gewicht Werte importieren</h3>
+                                </div>
+                                <div class="modal-body">
+                                <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                <th>Datum</th>                                            
+                                <th>Gewicht</th>
+                                <th>BMI</th>
+                                <th>Muskelanteil</th>
+                                <th>Körperfettanteil</th>
+                                <th>Wasseranteil</th>
+                                <th>Knochenanteil</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in items" >
+                                <td >{{item.date | date : 'medium'}}</td>
+                                <td>{{item.weight}}</td>
+                                <td>{{item.bmi}}</td>
+                                <td>{{item.muscle}}</td>
+                                <td>{{item.bodyFat}}</td>
+                                <td>{{item.water}}</td>
+                                <td>{{item.bone}}</td>
+                                </tr>
+                                </tbody>
+                                </table>
+                                </div>
+                                <div class="modal-footer">                            
+                                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                                <button class="btn btn-primary" ng-click="ok()">OK</button>
+                                </div>
+                            </script>
+
+                        </div>
+                        <button class="btn" ng-click="previewWeight()" ng-disabled="!previewButtonEnabled()">Preview</button>
+                    </div>
+                </div>
+            </div>        
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <hot-table settings="{afterSelectionEnd: afterSelectionEnd}" 
+                   colHeaders="true" 
+                   rowHeaders="true"
+                   datarows="db.rows"
+                   columns="db.columns"
+                   height="800" 
+                   >            
+        </hot-table>
+    </div>
+</div>

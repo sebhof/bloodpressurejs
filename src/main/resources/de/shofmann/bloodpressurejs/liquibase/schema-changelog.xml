@@ -106,4 +106,26 @@
         
     </changeSet>
     
+    <changeSet id="4" author="shofmann">
+        
+        <addColumn tableName="weight">
+            <column name="bmi" type="float" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        
+        <dropUniqueConstraint tableName="weight" constraintName="weight_creation_date_weight_body_fat_water_muscle_bone_key"/>
+        
+        <addUniqueConstraint columnNames="creation_date, weight, body_fat, water, muscle, bone, bmi" tableName="weight" constraintName="weight_unique_constraint"/>
+        
+        <dropDefaultValue tableName="weight" columnName="bmi"/>
+        
+        <rollback>            
+            <dropUniqueConstraint tableName="weight" constraintName="weight_creation_date_weight_body_fat_water_muscle_bone_bmi_key"/>
+            <dropColumn tableName="weight" columnName="bmi"/>
+            <addUniqueConstraint columnNames="creation_date, weight, body_fat, water, muscle, bone" tableName="weight" />
+        </rollback>
+        
+    </changeSet>
+    
 </databaseChangeLog>

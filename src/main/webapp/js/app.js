@@ -18,7 +18,7 @@
 
 (function () {
 
-    var app = angular.module('bloodpressurejs', ['ngRoute', 'highcharts-ng', 'ngHandsontable', 'ui.bootstrap', 'bloodpressurejs.bloodpressureController']);
+    var app = angular.module('bloodpressurejs', ['ngRoute', 'highcharts-ng', 'ngHandsontable', 'ui.bootstrap', 'bloodpressurejs.bloodpressureController', 'bloodpressurejs.weightController']);
 
     app.value('version', '1.0.0');
 
@@ -28,9 +28,13 @@
                     templateUrl: 'html/bloodpressure-report.html',
                     controller: 'BPCtrl'
                 })
-                .when('/import', {
+                .when('/import-bloodpressure', {
                     templateUrl: 'html/import-bloodpressure.html',
-                    controller: 'ImportCtrl'
+                    controller: 'ImportBPCtrl'
+                })
+                .when('/import-weight', {
+                    templateUrl: 'html/import-weight.html',
+                    controller: 'ImportWeightCtrl'
                 })
                 .otherwise({
                     redirectTo: '/'

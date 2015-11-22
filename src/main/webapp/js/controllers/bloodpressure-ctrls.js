@@ -98,7 +98,7 @@
 
         }]);
 
-    app.controller('ImportCtrl', ['$scope', '$http', '$location', '$filter', '$modal', function ($scope, $http, $location, $filter, $modal) {
+    app.controller('ImportBPCtrl', ['$scope', '$http', '$location', '$filter', '$modal', function ($scope, $http, $location, $filter, $modal) {
 
             $scope.db = {};
             $scope.db.rows = [];
@@ -225,7 +225,7 @@
             $scope.previewBloodpressure = function () {
                 var modalInstance = $modal.open({
                     templateUrl: 'import_preview_modal.html',
-                    controller: 'ModalInstanceCtrl',
+                    controller: 'ModalBloodpressureImportCtrl',
                     backdrop: 'static',
                     resolve: {
                         items: function () {
@@ -237,7 +237,7 @@
 
         }]);
 
-    app.controller('ModalInstanceCtrl', function ($http, $scope, $modalInstance, items) {
+    app.controller('ModalBloodpressureImportCtrl', function ($http, $scope, $modalInstance, items) {
 
         $scope.items = items;
 

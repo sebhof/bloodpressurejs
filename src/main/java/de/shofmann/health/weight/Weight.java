@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "weight", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"creation_date, weight, body_fat, water, muscle, bone"})
+    @UniqueConstraint(columnNames = {"creation_date, weight, body_fat, water, muscle, bone, bmi"})
 })
 @XmlRootElement
 public class Weight implements Serializable {
@@ -70,6 +70,28 @@ public class Weight implements Serializable {
     @Column(name = "bone", nullable = false)
     @NotNull
     private float bone;
+    
+    @Column(name = "bmi", nullable = false)
+    @NotNull
+    private float bmi;
+
+    /**
+     * Get the value of bmi
+     *
+     * @return the value of bmi
+     */
+    public float getBmi() {
+        return bmi;
+    }
+
+    /**
+     * Set the value of bmi
+     *
+     * @param bmi new value of bmi
+     */
+    public void setBmi(float bmi) {
+        this.bmi = bmi;
+    }
 
     /**
      * Get the value of bone
